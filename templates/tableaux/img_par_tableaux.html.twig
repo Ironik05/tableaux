@@ -1,36 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {# Titre de la page : nom de la catégorie + nom du site #}
-    {# {{ produit.category.name }} #}
+	{# Titre de la page : nom de la catégorie + nom du site #}
+	{# {{ produit.category.name }} #}
 - L'Art Nous Protège
 {% endblock %}
 
-{% block body %}
-    <div class="container mt-5">
-        {# Bouton de retour vers la liste des catégories #}
-        <a href="{{ path('app_categories') }}" class="btn btn-secondary mb-4">← Retour aux catégories</a>
-        {# Titre principal affichant le nom de la catégorie #}
-        {# <h1 class="mb-4">📦 Rayon :
-            {{ category.name }}</h1> #}
+	{% block body %}
+		<div
+		class="container mt-5"> {# Bouton de retour vers la liste des catégories #}
+		<a href="{{ path('app_categories') }}" class="btn btn-secondary mb-4">← Retour aux catégories</a>
+		{# Titre principal affichant le nom de la catégorie #}
+		{# <h1 class="mb-4">📦 Rayon :
+		            {{ category.name }}</h1> #}
 
-        <div class="row">
-            {# Boucle sur tous les produits de la catégorie #}
-            {% for produit in produits %}
-                    <div class="col-md-6 col-lg-4 mb-4">
-                            <h5 class="card-title">{{ produit.titre }}</h5>
+		<div
+			class="row">
+			{# Boucle sur tous les produits de la catégorie #}
+			{% for produit in produits %}
+				<div class="col-md-6 col-lg-4 mb-4">
+					<h5 class="card-title">{{ produit.titre }}</h5>
 
-                            {#image du produit #}
-                            {% if produit.img %}
-								<img src="{{ asset(produit.img) }}" alt="{{ produit.titre }}" class="img-fluid rounded">
-							{% else %}
-								<div class="alert alert-warning text-center" role="alert">
-									Aucune image disponible pour ce produit.
-								</div>
-							{% endif %}
-                    {# </div> #}
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+					{#image du produit #}
+					{% if produit.img %}
+						<img src="{{ asset('images/' ~ produit.img) }}" class="card-img-top">
+					{% else %}
+						<img src="{{ asset('images/default.jpg') }}" class="card-img-top">
+					{% endif %}
+
+					{# </div> #}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
