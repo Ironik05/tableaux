@@ -55,9 +55,15 @@
 						<div
 							class="card-footer bg-white">
 							{# Lien vers la page de détail du produit #}
-							<a href="{{ path('app_img_par_tableaux', {id: produit.id, img: produit.img}) }}" class="btn btn-primary btn-sm w-100">
-								Voir l'image
-							</a>
+							{% if produit.img %}
+								<a href="{{ path('app_img_par_tableaux', {id: produit.id, img: produit.img}) }}" class="btn btn-primary btn-sm w-100">
+									Voir l'image
+								</a>
+							{% else %}
+								<button class="btn btn-secondary btn-sm w-100" disabled>
+									Pas d'image disponible
+								</button>
+							{% endif %}
 						</div>
 					</div>
 				</div>
