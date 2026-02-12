@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{# Titre de la page : nom de la catégorie + nom du site #}
+	{# {{ produit.category.name }} #}
+- L'Art Nous Protège
+{% endblock %}
+
+	{% block body %}
+		<div
+		class="container mt-5"> {# Bouton de retour vers la liste des catégories #}
+		<a href="{{ path('app_categories') }}" class="btn btn-secondary mb-4">← Retour aux catégories</a>
+
+		{# Titre principal affichant le nom de la catégorie #}
+		{# <h1 class="mb-4">📦 Rayon :
+			            {{ category.name }}</h1> #}
+
+		<div
+			class="row">
+			{# Boucle sur tous les produits de la catégorie #}
+			{% for produit in produits %}
+				<div class="col-md-6 col-lg-4 mb-4">
+					<div class="card h-100 shadow-sm">
+
+						<div
+							class="card-body">
+							{# Nom du produit #}
+							<h5 class="card-title">{{ produit.titre }}</h5>
+
+							{# Description tronquée à 80 caractères #}
+							<p>{{ produit.description|slice(0, 80) }}...</p>
+
+							{# Prix du produit #}
+							<p class="card-text">
+								<strong class="text-success fs-5">{{ produit.price }}
+									€</strong>
+							</p>
+
+							{# Stock du produit #}
+							<p class="card-text text-muted">
+								<i class="fas fa-box"></i>
+								{{ produit.stock }}
+								unités disponibles
+							</p>
+
+							{# Affichage de l'image du produit si elle existe #}
+							{# {% if produit.img %}
+								<img src="{{ asset('uploads/' ~ produit.img) }}" alt="{{ produit.titre }}" class="img-fluid rounded">
+							{% else %}
+								<div class="alert alert-warning text-center" role="alert">
+									Aucune image disponible pour ce produit.
+								</div>
+							{% endif %} #}
+						</div>
+						<div
+							class="card-footer bg-white">
+							{# Lien vers la page de détail du produit #}
+							<a href="{{ path('app_img_par_tableaux', {id: produit.id, img: produit.img}) }}" class="btn btn-primary btn-sm w-100">
+								Voir l'image
+							</a>
+						</div>
+					</div>
+				</div>
+			{% else %}
+				{# Message affiché si la catégorie ne contient aucun produit #}
+				<div class="col-12">
+					<div class="alert alert-info text-center" role="alert">
+						Aucun produit disponible dans ce rayon pour le moment.
+					</div>
+
+				{% endfor %}
+			</div>
+		</div>
+	{% endblock %}
